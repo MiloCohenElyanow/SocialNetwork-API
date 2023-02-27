@@ -111,12 +111,5 @@ async function rmThought(req,res){
   };
 };
 
-module.exports = {
-  getAllThoughts,
-  getAThought,
-  createNewThought,
-  updateThought,
-  addNewReaction,
-  rmReaction,
-  rmThought
-};
+module.exports = { getAllThoughts, getAThought, createNewThought, updateThought,
+  addNewReaction, rmReaction, rmThought };

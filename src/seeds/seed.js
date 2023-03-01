@@ -26,16 +26,12 @@ const seedUsers = [
 
 const seedThoughts = [
   {
-    _id:1,
     thoughtText:"Im having a thought, a really cool one",
-    Date: Date.now,
     username:"Josh",
     reaction:"3092rniodsf90p2io3n"
   },
   {
-    _id:2,
     thoughtText:"this is a boring thought its not cool",
-    Date: Date.now,
     username:"Katherine",
     reaction:"9032njfidksfn320ioewknf"
   }
@@ -44,8 +40,8 @@ const seedThoughts = [
 const seedDB = async () => {
   //deleting everything in db first
   console.log("deleting from db")
-  await User.deleteMany({seedUsers});
-  await Thought.deleteMany({seedThoughts});
+  // await User.deleteMany(UserSchema);
+  // await Thought.deleteMany(seedThoughts);
 
   //inserting seeds
   await User.insertMany(seedUsers);

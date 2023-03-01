@@ -1,4 +1,4 @@
-const {connect, connection} = requier("mongoose");
+const {connect, connection} = require("mongoose");
 
 
 const connectionString =

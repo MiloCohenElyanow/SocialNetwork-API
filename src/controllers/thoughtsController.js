@@ -1,20 +1,24 @@
 const mongoose = require("mongoose");
-const {Thoughts, Users} = require("../models");
+const {Thought, User} = require("../models");
 
 async function getAllThoughts(req,res){
+  
   try {
-    const groupthoughts = await Thoughts.find()
+    const groupthoughts = await Thought.find()
     .populate({path: "reactions"});
+
+    console.log(groupthoughts);
 
     res.status(200).json(groupthoughts);
   } catch (error) {
+    console.log(error.message);
     res.status(500).json(error);
   };
 };
 
 async function getAThought(req,res){
   try{
-    const thought = await Thoughts.findOne({_id: req.params.id})
+    const thought = await Thought.findOne({_id: req.params.id})
     .populate({path: "reactions"}); // this will get a thought by id
 
     if(!thought){
@@ -29,8 +33,8 @@ async function getAThought(req,res){
 
 async function createNewThought(req,res){
   try{
-    const thought = await Thoughts.create(req.body);
-    const updateUser = await Users.findOneAndUpdate(
+    const thought = await Thought.create(req.body);
+    const updateUser = await User.findOneAndUpdate(
       {username:req.body.username},
       {$push: {thoughts: thought._id}}, // refering to the user thoughts here, all these thoughts getting a bit confusing 
       {new: true}
@@ -47,7 +51,7 @@ async function createNewThought(req,res){
 
 async function updateThought(req,res){
   try{
-    const updatedThought = await Thoughts.findOneAndUpdate(
+    const updatedThought = await Thought.findOneAndUpdate(
       {_id: req.params.id},
       req.body,
       {runValidators: true, new:true}
@@ -64,7 +68,7 @@ async function updateThought(req,res){
 
 async function addNewReaction(req,res) {
   try{
-    const reaction = await Thoughts.findOneAndUpdate(
+    const reaction = await Thought.findOneAndUpdate(
       {_id: req.params.id},
       { $push: { reactions: req.body}}, // reference user reactions here
       { runValidators: true, new:true}
@@ -82,7 +86,7 @@ async function addNewReaction(req,res) {
 
 async function rmReaction (req,res) {
   try{
-    const reaction = await Thoughts.findOneAndUpdate(
+    const reaction = await Thought.findOneAndUpdate(
       {_id: req.params.id},
       {$pull: { reactions: { reactionId: req.params.reactionId}}},
       {new:true}
@@ -99,7 +103,7 @@ async function rmReaction (req,res) {
 
 async function rmThought(req,res){
   try{
-    const removedThought = await Thoughts.findOneAndDelete({_id: req.params.id});
+    const removedThought = await Thought.findOneAndDelete({_id: req.params.id});
 
     if(!removedThought){
       res.status(500).json({message:"cannot delete thought with provided id, thought not found"});

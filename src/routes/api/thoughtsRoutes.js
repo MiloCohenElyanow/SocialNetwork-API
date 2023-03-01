@@ -6,13 +6,13 @@ const { getAllThoughts, getAThought, createNewThought, updateThought,
 // /api/thought
 router.route('/').get(getAllThoughts).post(createNewThought);
 
-// /api/thought/:id
+// /api/thought/?id
 router.route('/:id').get(getAThought).put(updateThought).delete(rmThought);
 
-// /api/thought/:id/reactions
+// /api/thought/?id/reactions
 router.route('/:id/reactions').post(addNewReaction);
 
-// /api/thought/:id/reactions/:reactionId
+// /api/thought/?id/reactions/?reactionId
 router.route('/:id/reactions/:reactionId').delete(rmReaction);
 
 

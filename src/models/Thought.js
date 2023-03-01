@@ -2,7 +2,7 @@ const {Schema, Types, model} = require("mongoose");
 const dayjs = require("dayjs");
 const ReactionSchema = require("./Reaction");
 
-const ThoughtsSchema = new Schema(
+const ThoughtSchema = new Schema(
   {
 
     _id: {
@@ -36,10 +36,10 @@ const ThoughtsSchema = new Schema(
   }
 );
 
-ThoughtsSchema.virtual("reactions").get(function (){
+ThoughtSchema.virtual("reactionsCount").get(function (){
   return this.reactions.length;
 });
 
-const Thoughts = model("Thought", ThoughtsSchema);
+const Thought = model("Thought", ThoughtSchema);
 
-module.exports = Thoughts;
+module.exports = Thought;

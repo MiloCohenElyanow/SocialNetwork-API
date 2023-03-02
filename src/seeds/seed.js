@@ -11,6 +11,7 @@ useNewUrlParser: true, useUnifiedTopology: true})
   })
   .catch((err) => {
     console.log("---ERROR---: \n", err);
+    console.log("make sure your not seeding this database twice, copies are not allowed!")
   })
 
 const seedUsers = [

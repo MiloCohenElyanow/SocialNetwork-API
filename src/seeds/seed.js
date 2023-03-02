@@ -1,5 +1,5 @@
 const mongoose = require ("mongoose");
-const {Thought, User } = require("../models");
+const {Thought, User, Reaction } = require("../models");
 
 const db = "mongodb://127.0.0.1:27017/socialNetworkApiDB"
 
@@ -22,6 +22,14 @@ const seedUsers = [
   {
     username: "Josh",
     email: "JoshWork@gmail.com",
+  },
+  {
+    username: "EpicGamerXx",
+    email: "EpicGamer@hotmail.com",
+  },
+  {
+    username:"BananaMan47",
+    email: "MrBananaMan@gmail.com",
   }
 ];
 
@@ -29,14 +37,43 @@ const seedThoughts = [
   {
     thoughtText:"Im having a thought, a really cool one",
     username:"Josh",
-    reaction:"3092rniodsf90p2io3n"
   },
   {
     thoughtText:"this is a boring thought its not cool",
     username:"Katherine",
-    reaction:"9032njfidksfn320ioewknf"
+  },
+  {
+    thoughtText:"I love gaming so much!!!",
+    username:"EpicGamerXx"
+  },
+  {
+    thoughtText:"Eating banana's is super fun, its my favorite passtime!",
+    username:"BananaMan47"
   }
 ];
+
+const seedReactions = [
+  {
+    reactionContent: " holy cow this is so amazing thanks for making this thought!",
+    username:"Katherine"
+  },
+  {
+    reactionContent:"so sorry to hear you made a boring thought, better luck next time!",
+    username:"Josh"
+  },
+  {
+    reactionContent:"oh wow I like gaming too",
+    username:"Josh"
+  },
+  {
+    reactionContent:"I also like gaming lets play games together!",
+    username:"Katherine"
+  },
+  {
+    reactionContent:"I dont like bananas, stop eating bananas...",
+    username:"EpicGamerXx"
+  },
+]
 
 const seedDB = async () => {
   //deleting everything in db first
@@ -52,4 +89,5 @@ const seedDB = async () => {
 
 seedDB().then (() => {
   mongoose.connection.close();
+  console.log("seeding completed succesfully");
 });
